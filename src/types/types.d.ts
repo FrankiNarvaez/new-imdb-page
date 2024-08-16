@@ -1,0 +1,48 @@
+export type resultTrendingMovies = {
+  adult: boolean,
+  backdrop_path: string,
+  genre_ids: any,
+  id: number,
+  media_type: string,
+  original_language: string,
+  original_title: string,
+  overview: string,
+  popularity: number,
+  poster_path: string,
+  release_date: string,
+  title: string,
+  video: boolean,
+  vote_average: number,
+  vote_count: number,
+}
+
+export type resultTrendingTvShows = {
+  adult: boolean,
+  backdrop_path: string,
+  first_air_date: string,
+  genre_ids: any,
+  id: number,
+  media_type: string,
+  name: string,
+  origin_country: any,
+  original_language: string,
+  original_name: string,
+  overview: string,
+  popularity: number,
+  poster_path: string,
+  vote_average: number,
+  vote_count: number,
+}
+
+export type resutlTrendingCelebrities = {
+  adult: boolean,
+  gender: number,
+  id: number,
+  known_for: any,
+  known_for_department: string,
+  media_type: string,
+  name: string,
+  original_name: string,
+  popularity: number,
+  profile_path: string,
+}
