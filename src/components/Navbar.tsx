@@ -1,13 +1,32 @@
 "use client"
 import { FaImdb, FaSearch } from "react-icons/fa";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Card from "./Card";
+import { api } from "@/lib/api";
+import { resultTrendingMovies, resultTrendingTvShows, resutlTrendingCelebrities } from '@/types/types';
 
 export default function Navbar() {
-  const [type, setType] = useState("movies")
+  const [type, setType] = useState("movie")
   const [showDropdown, setShowDropDown] = useState(false)
   const [query, setQuery] = useState("")
+  const [results, setResults] = useState([])
+
+  useEffect(() => {
+    const getResultByQuery = async () => {
+      try {
+        const { data } = await api.get(`search/${type}`, {
+          params: {
+            query,
+          }
+        })
+        setResults(data?.results)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    getResultByQuery()
+  }, [query, type])
 
   return (
     <div className="fixed left-0 right-0 top-0 px-[6%] md:px-[20%] lg:px-[25%] py-4 flex justify-between items-center bg-zinc-800/50">
@@ -21,15 +40,15 @@ export default function Navbar() {
             className="py-2 px-2 bg-gray-100 border-transparent rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-700 dark:border-transparent dark:text-neutral-400 dark:focus:ring-neutral-600"
             onChange={(e) => {setType(e.target.value);}}  
           >
-            <option value="movies">Movies</option>
-            <option value="tvshows">TV shows</option>
-            <option value="celebrities">Celebrities</option>
+            <option value="movie">Movies</option>
+            <option value="tv">TV shows</option>
+            <option value="person">Celebrities</option>
           </select>
           <input 
             type="text" 
             className="rounded-lg px-3 w-10 md:w-36 focus:w-36 text-black" 
             placeholder="Search..."
-            onChange={(e) => {setQuery(e.target.value); setShowDropDown(true)}}
+            onChange={(e) => {setQuery(e.target.value); setShowDropDown(true); }}
           />
           <button className="bg-yellow-400 p-2 rounded hover:bg-yellow-500/100">
             <FaSearch/>
@@ -37,7 +56,24 @@ export default function Navbar() {
         </form>
       </section>
       {showDropdown && query.length > 0 && (
-        <section className="absolute top-20 left-0 right-0 m-auto w-max bg-zinc-900 p-4 rounded-md h-[80vh] overflow-auto grid gap-4 grid-cols-1 md:grid-cols-2"><Card /><Card /><Card /><Card /></section>
+        <section className="absolute top-20 left-0 right-0 m-auto w-max bg-zinc-900 p-4 rounded-md h-[80vh] overflow-auto grid gap-4 grid-cols-1 md:grid-cols-2">
+          {results.map((result: resultTrendingMovies & resultTrendingTvShows & resutlTrendingCelebrities) => (
+            <Card
+              key={result.id}
+              picture={result?.poster_path} 
+              title={result?.original_title || result?.name} 
+              date={result?.release_date}
+              rating={result?.vote_average}
+              type={type}
+              id={result?.id}
+              handleShopDrowDown={() => { 
+                setShowDropDown(false);
+                setQuery(""); 
+              }}
+            />
+          ))
+          }
+        </section>
       )}
     </div>
   );

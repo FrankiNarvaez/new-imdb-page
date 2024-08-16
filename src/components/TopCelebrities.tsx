@@ -12,7 +12,7 @@ export default function TopCelebrities() {
       try {
         const { data } = await api.get('trending/person/day', {
           params: {
-            language: 'es-MX'
+            language: 'en-US'
           }
         })
         setCelebrities(data?.results)
@@ -37,6 +37,7 @@ export default function TopCelebrities() {
             rating={celebrity?.popularity}
             type={celebrity?.media_type}
             id={celebrity?.id}
+            handleShopDrowDown={() => {}}
           />
         ))}
       </section>

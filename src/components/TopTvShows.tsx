@@ -12,7 +12,7 @@ export default function TopTvShows() {
       try {
         const { data } = await api.get('trending/tv/day', {
           params: {
-            language: 'es-Mx'
+            language: 'en-US'
           }
         })
         setTvshows(data?.results)
@@ -37,6 +37,7 @@ export default function TopTvShows() {
             rating={tvShow?.vote_average}
             type={tvShow?.media_type}
             id={tvShow?.id}
+            handleShopDrowDown={() => {}}
           />
         ))}
       </section>

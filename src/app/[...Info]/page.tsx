@@ -41,14 +41,14 @@ export default function Info() {
   const [info, setInfo] = useState<resultTrendingMovies & resultTrendingTvShows & resutlTrendingCelebrities>()
   const pathname = usePathname()
   const [,type, query] = pathname.split("/")
-  console.log(info)
 
   useEffect(() => {
     const getInfo = async () => {
       try {
-        const { data } = await api.get(`/search/${type}`, {
+        const { data } = await api.get(`search/${type}`, {
           params: {
-            query
+            query,
+            language: 'en-US'
           }
         })
         setInfo(data?.results[0])

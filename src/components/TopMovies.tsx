@@ -12,7 +12,7 @@ export default function TopMovies() {
       try {
         const { data } = await api.get('trending/movie/day', {
           params: { 
-            language: 'es-MX'
+            language: 'en-US'
           }
         });
         setMovies(data?.results);
@@ -37,6 +37,7 @@ export default function TopMovies() {
             rating={movie?.vote_average}
             type={movie?.media_type}
             id={movie?.id}
+            handleShopDrowDown={() => {}}
           />
         ))}
       </section>
