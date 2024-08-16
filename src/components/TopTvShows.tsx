@@ -36,6 +36,7 @@ export default function TopTvShows() {
             date={tvShow?.first_air_date}
             rating={tvShow?.vote_average}
             type={tvShow?.media_type}
+            id={tvShow?.id}
           />
         ))}
       </section>

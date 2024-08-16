@@ -36,6 +36,7 @@ export default function TopMovies() {
             date={movie?.release_date}
             rating={movie?.vote_average}
             type={movie?.media_type}
+            id={movie?.id}
           />
         ))}
       </section>

@@ -36,6 +36,7 @@ export default function TopCelebrities() {
             date=""
             rating={celebrity?.popularity}
             type={celebrity?.media_type}
+            id={celebrity?.id}
           />
         ))}
       </section>

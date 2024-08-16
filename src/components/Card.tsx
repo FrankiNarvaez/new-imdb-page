@@ -3,7 +3,7 @@ import { FaStar } from "react-icons/fa6";
 import Link from 'next/link';
 import { resultTrendingMovies } from '@/types/types';
 
-export default function Card({ picture, title, date, rating, type }: { picture: string, title: string, date: string, rating: number, type: string }) {
+export default function Card({ picture, title, date, rating, type, id }: { picture: string, title: string, date: string, rating: number, type: string, id: number }) {
   return (
     <Link href={`${type}/${title}`}>
       <section className='flex flex-col bg-slate-50/10 w-72 p-4 rounded-md'>
