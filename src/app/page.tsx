@@ -1,4 +1,3 @@
-import Navbar from "@/components/Navbar"
 import MovieTop from "@/components/MovieTop"
 import TopCelebrities from "@/components/TopCelebrities"
 import TopMovies from "@/components/TopMovies"
@@ -13,8 +12,6 @@ const DATA = [
 export default function Home() {
   return (
     <main>
-      <Navbar />
-      
       <TopMovies />
       <TopTvShows />
       <TopCelebrities />
